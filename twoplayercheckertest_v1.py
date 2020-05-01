@@ -1,12 +1,12 @@
 #Checkers
 
-from Tkinter import *
+from tkinter import *
 
 from PIL import ImageTk
 
-import tkMessageBox 
+import tkinter.messagebox as tkMessageBox 
 
-
+# import tkMessageBox as tm
 class TwoPlayer(): #creating a class that will create the main Checkers Interface
     
     def __init__(self,master): #takes in the game window as a parameter
@@ -161,7 +161,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
         global turns
         self.CheckerButtonPress(event)
         x = prevsquare
-        print prevsquare
+        # print prevsquare
 
         
         if len(turns)>=4:

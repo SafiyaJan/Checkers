@@ -1,10 +1,14 @@
 #Checkers
 
-from Tkinter import *
-
+#libraries used
+from tkinter import *
+# import tkinter as tk
 from PIL import ImageTk
-
-import tkMessageBox 
+# import tkMessageBox
+import tkinter.messagebox as tm
+import re
+import random
+import math 
 
 
 class OnePlayer(): #creating a class that will create the main Checkers Interface
@@ -138,18 +142,18 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
         global turns
         self.CheckerButtonPress(event)
         x = prevsquare
-        print prevsquare
+        # print prevsquare
 
         if len(turns)>=4:
             #checking for double turns, if last turn was played by lightbrown, next turn has to be darkbrown's
             if turns[len(turns)-2] == turns[len(turns)-4]:
                 if turns[len(turns)-2] == "darkbrown":
-                    print "Its LightBrown's Turn"
+                    print ("Its LightBrown's Turn")
                     prevsquare = []
                     turns = []
                     return
                 if turns[len(turns)-2] == "lightbrown":
-                    print "Its DarkBrown's Turn"
+                    print ("Its DarkBrown's Turn")
                     prevsquare = []
                     turns = []
                     return
@@ -161,13 +165,19 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                     turns = []
                     return
 
+                # row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                # column = math.floor(x[1][1]/self.squaresize)
+
+                # row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                # column1 = math.floor(x[0][1]/self.squaresize)
+
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
 
                 #checking for invalid moves
                 if column1 == column or row1 == row or row>row1 or (row1-row)>2:
@@ -291,13 +301,13 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                 
             elif x[0][0] == "lightbrown": #checking if the checker that was moved is lightbrown
 
-                #calculating row and column of the square where checker wants to move 
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                #calculating the row and column of the square where the checker wants to move
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
-                #calculating row and column of the square where the checker initially was 
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                #calculating the row and column of the square where the checker initially was   
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
 
                 #checking if the checker has moved to a dark square or not
                 if x[1][0] == "#D2B48C":
@@ -422,12 +432,13 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                 
         if len(turns)<4: #checking if 3 or less moves have been made
             if x[0][0] == "darkbrown":
-                    #calculating row and column of the current and post square
-                    row = 7 - (x[1][2]/self.squaresize)
-                    column = x[1][1]/self.squaresize
+                    #calculating the row and column of the square where the checker wants to move
+                    row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                    column = math.floor(x[1][1]/self.squaresize)
 
-                    row1 = 7 - (x[0][2]/self.squaresize)
-                    column1 = x[0][1]/self.squaresize
+                    #calculating the row and column of the square where the checker initially was   
+                    row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                    column1 = math.floor(x[0][1]/self.squaresize)
 
                     #checking is move was made to a dark square
                     if x[1][0] == "#D2B48C":
@@ -464,12 +475,13 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                         
             elif x[0][0] == "lightbrown": #checking which checker was moved
 
-                    #calculating thw row and column of the current and post square
-                    row = 7 - (x[1][2]/self.squaresize)
-                    column = x[1][1]/self.squaresize
+                    #calculating the row and column of the square where the checker wants to move
+                    row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                    column = math.floor(x[1][1]/self.squaresize)
 
-                    row1 = 7 - (x[0][2]/self.squaresize)
-                    column1 = x[0][1]/self.squaresize
+                    #calculating the row and column of the square where the checker initially was   
+                    row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                    column1 = math.floor(x[0][1]/self.squaresize)
 
                     #checking the post square is dark or not
                     if x[1][0] == "#D2B48C":
@@ -513,12 +525,12 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
 
         if turns[len(turns)-2] == turns[len(turns)-4]:
             if turns[len(turns)-2] == "darkbrownking":
-                print "Its LightBrown's Turn"
+                print ("Its LightBrown's Turn")
                 prevsquare = []
                 turns = []
                 return
             if turns[len(turns)-2] == "lightbrownking":
-                print "Its DarkBrown's Turn"
+                print ("Its DarkBrown's Turn")
                 prevsquare = []
                 turns = []
                 return
@@ -531,12 +543,12 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                     return
                 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
                 
                 if column1 == column or row1 == row:
                     prevsquare = []
@@ -714,12 +726,12 @@ class OnePlayer(): #creating a class that will create the main Checkers Interfac
                     return
                 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
                 
                 if column1 == column or row1 == row:
                     prevsquare = []
@@ -904,7 +916,7 @@ def ExitProgram(): #exits the program by destroying main startup window
 def Instructions(): #creating a top level window that where an image with all the instruction is places
     howtoplay = Toplevel()
     howtoplay.title("Checkers! - How to Play")
-    background = "/Users/safiyajankhan/Desktop/Instructions.gif"
+    background = "Instructions.gif"
     canvas = Canvas(howtoplay,width=600,height = 570)
     canvas.pack()
     background_image = ImageTk.PhotoImage(file=background) #loading image
@@ -922,11 +934,11 @@ def main():
     startup = Tk()
     startup.title("Checkers!")
     
-    background = "/Users/safiyajankhan/Desktop/CheckersStartup.gif"
-    howtoplay = "/Users/safiyajankhan/Desktop/HowToPlay.gif"
-    oneplayer = "/Users/safiyajankhan/Desktop/OnePlayer.gif"
-    twoplayer = "/Users/safiyajankhan/Desktop/TwoPlayer.gif"
-    exitprogram = "/Users/safiyajankhan/Desktop/Exit.gif"
+    background = "CheckersStartup.gif"
+    howtoplay = "HowToPlay.gif"
+    oneplayer = "OnePlayer.gif"
+    twoplayer = "TwoPlayer.gif"
+    exitprogram = "Exit.gif"
 
     #loading images for the buttons      
     howtoplay_photo = ImageTk.PhotoImage(file=howtoplay)

@@ -1,6 +1,7 @@
 #Checkers
 
-from Tkinter import *
+# from Tkinter import *
+from tkinter import *
 
 class Interface(): #creating a class that will create the main Checkers Interface
     
@@ -71,17 +72,17 @@ class Interface(): #creating a class that will create the main Checkers Interfac
         global turns
         self.CheckerButtonPress(event)
         x = prevsquare
-        print prevsquare
+        # print prevsquare
   
         if len(turns)>=4:
             if turns[len(turns)-2] == turns[len(turns)-4]:
                 if turns[len(turns)-2] == "darkbrown":
-                    print "Its LightBrown's Turn"
+                    # print "Its LightBrown's Turn"
                     prevsquare = []
                     turns = []
                     return
                 if turns[len(turns)-2] == "lightbrown":
-                    print "Its DarkBrown's Turn"
+                    # print "Its DarkBrown's Turn"
                     prevsquare = []
                     turns = []
                     return

@@ -1,11 +1,15 @@
 ## Safiya Jan - 15112 Fall 2016 - Final Project ##
 
 #libraries used
-from Tkinter import *
+# from Tkinter import *
+# import tkinter as tk
+from tkinter import *
 from PIL import ImageTk
-import tkMessageBox
+# import tkMessageBox as tm
+import tkinter.messagebox as tm
 import re
 import random
+import math 
 
 
 ''' Functions Used in Two Player Class '''
@@ -219,9 +223,9 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                 x = 105
 
         if countdb == 1:
-            tkMessageBox.showinfo("Winner","Lightbrown Won!")
+            tm.showinfo("Winner","Lightbrown Won!")
         if countlb == 1 :
-            tkMessageBox.showinfo("Winner","Darkbrown Won!")
+            tm.showinfo("Winner","Darkbrown Won!")
 
     
     def CheckerButtonPress(self,event): #calculates the coordinates at which the checker was clicked
@@ -238,18 +242,18 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
         global turns
         self.CheckerButtonPress(event)
         x = prevsquare
-        print prevsquare
+        # print (prevsquare)
 
         
         if len(turns)>=4:
             #checking for double turns, if last turn was played by lightbrown, next turn has to be darkbrown's
             if turns[len(turns)-2] == turns[len(turns)-4]:
                 if turns[len(turns)-2] == "darkbrown":
-                    tkMessageBox.showwarning("Incorrect Move","Its Lightbrown's Turn")
+                    tm.showwarning("Incorrect Move","Its Lightbrown's Turn")
                     prevsquare = []
                     return
                 if turns[len(turns)-2] == "lightbrown":
-                    tkMessageBox.showwarning("Incorrect Move","Its Darkbrowns's Turn")
+                    tm.showwarning("Incorrect Move","Its Darkbrowns's Turn")
                     prevsquare = []
                     return
                 
@@ -261,12 +265,12 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                     return
 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
 
                 #checking for invalid moves
                 if column1 == column or row1 == row or row>row1 or (row1-row)>2:
@@ -299,7 +303,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print (tags)
 
                             #checking if capture square has a darkbrown checker in it or if the square is empty
                             if "darkbrown" in tags:
@@ -420,13 +424,13 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                 
             elif x[0][0] == "lightbrown": #checking if the checker that was moved is lightbrown
 
-                #calculating row and column of the square where checker wants to move 
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                #calculating the row and column of the square where the checker wants to move
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
-                #calculating row and column of the square where the checker initially was 
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                #calculating the row and column of the square where the checker initially was   
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
 
                 #checking if the checker has moved to a dark square or not
                 if x[1][0] == "#D2B48C":
@@ -463,7 +467,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print (tags)
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -516,7 +520,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print (tags)
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -581,22 +585,23 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
         if len(turns)<4: #checking if 3 or less moves have been made
             if turns[0][0] == turns[0][1]:
                 if turns[0] == "darkbrown":
-                    tkMessageBox.showwarning("Incorrect Move","Its Lightbrown's Turn")
+                    tm.showwarning("Incorrect Move","Its Lightbrown's Turn")
                     prevsquare = []
                     turns = []
                     return
                 if turns[0] == "lightbrown":
-                    tkMessageBox.showwarning("Incorrect Move","Its Darkbrowns's Turn")
+                    tm.showwarning("Incorrect Move","Its Darkbrowns's Turn")
                     prevsquare = []
                     turns = []
                     return
             if "darkbrown" in x[0][0]:
-                    #calculating row and column of the current and post square
-                    row = 7 - (x[1][2]/self.squaresize)
-                    column = x[1][1]/self.squaresize
+                    #calculating the row and column of the square where the checker wants to move
+                    row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                    column = math.floor(x[1][1]/self.squaresize)
 
-                    row1 = 7 - (x[0][2]/self.squaresize)
-                    column1 = x[0][1]/self.squaresize
+                    #calculating the row and column of the square where the checker initially was   
+                    row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                    column1 = math.floor(x[0][1]/self.squaresize)
 
                     #checking is move was made to a dark square
                     if x[1][0] == "#D2B48C":
@@ -738,12 +743,13 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                         
             elif x[0][0] == "lightbrown": #checking which checker was moved
 
-                    #calculating thw row and column of the current and post square
-                    row = 7 - (x[1][2]/self.squaresize)
-                    column = x[1][1]/self.squaresize
+                    #calculating the row and column of the square where the checker wants to move
+                    row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                    column = math.floor(x[1][1]/self.squaresize)
 
-                    row1 = 7 - (x[0][2]/self.squaresize)
-                    column1 = x[0][1]/self.squaresize
+                    #calculating the row and column of the square where the checker initially was   
+                    row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                    column1 = math.floor(x[0][1]/self.squaresize)
 
                     #checking the post square is dark or not
                     if x[1][0] == "#D2B48C":
@@ -779,7 +785,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                                 item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                                 tags = self.canvas.gettags(item)[0]
-                                print tags
+                                # print tags
                               
                             if "lightbrown" in tags:
                                 turns = []
@@ -833,7 +839,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                                 item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                                 tags = self.canvas.gettags(item)[0]
-                                print tags
+                                # print tags
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -898,11 +904,11 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
         if turns[len(turns)-2] == turns[len(turns)-4]:
             if turns[len(turns)-2] == "darkbrownking":
-                tkMessageBox.showwarning("Incorrect Move","Its Lightbrown's Turn")
+                tm.showwarning("Incorrect Move","Its Lightbrown's Turn")
                 prevsquare = []
                 return
             if turns[len(turns)-2] == "lightbrownking":
-                tkMessageBox.showwarning("Incorrect Move","Its Darkbrown's Turn")
+                tm.showwarning("Incorrect Move","Its Darkbrown's Turn")
                 prevsquare = []
                 return
             
@@ -914,12 +920,12 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                     return
                 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
                 
                 if column1 == column or row1 == row:
                     prevsquare = []
@@ -950,7 +956,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -997,7 +1003,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -1045,7 +1051,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -1090,7 +1096,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -1151,12 +1157,12 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
                     return
                 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
                 
                 if column1 == column or row1 == row:
                     prevsquare = []
@@ -1187,7 +1193,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -1233,7 +1239,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -1281,7 +1287,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -1326,7 +1332,7 @@ class TwoPlayer(): #creating a class that will create the main Checkers Interfac
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "lightbrown" in tags:
                                 turns = []
@@ -1513,9 +1519,9 @@ class OnePlayer():
                 x = 105
 
         if countdb == 1:
-            tkMessageBox.showinfo("Winner","Lightbrown Won!")
+            tm.showinfo("Winner","Lightbrown Won!")
         if countlb == 1 :
-            tkMessageBox.showinfo("Winner","Darkbrown Won!")
+            tm.showinfo("Winner","Darkbrown Won!")
 
 
 
@@ -1532,8 +1538,10 @@ class OnePlayer():
                 if ("lightbrown") in tag or ("lb" in tag):
                     #print tag
                     coords = self.canvas.coords(tag)
-                    row = 7 - int(coords[1])/self.squaresize
-                    column = int(coords[0])/self.squaresize
+                    row = math.floor(7 - int(coords[1])/self.squaresize) + 1
+                    column = math.floor(int(coords[0])/self.squaresize)
+
+
                     #print row,column
                     location.append((tag,row,column)) #appending to location, name of checker and row and column of checker postion
                     
@@ -1729,7 +1737,7 @@ class OnePlayer():
 
     def makeAIMove(self,possiblemoves, possiblecapture):
         if len(possiblemoves) == 0: #if there are no possible moves, then that means that all darkbrown checkers are blocked, darkbrown then wins
-            tkMessageBox.showinfo("Winner","Darkbrown Won!")
+            tm.showinfo("Winner","Darkbrown Won!")
             return
             
         elif len(possiblecapture) == 0: #if no possible possible captures, choose a random move from the possible moves and move the checker
@@ -1808,7 +1816,7 @@ class OnePlayer():
         self.CheckerButtonPress(event) #calling checkerbuttonpress function
         
         x = prevsquare
-        print x
+        # print x
 
         if "darkbrown" in x[0][0]:
             if x[1][0] == "#D2B48C": #cannot move to a light square
@@ -1816,12 +1824,12 @@ class OnePlayer():
                 turns = []
 
             #calculating the row and column of the square where the checker wants to move
-            row = 7 - (x[1][2]/self.squaresize)
-            column = x[1][1]/self.squaresize
+            row = math.floor(7 - (x[1][2]/self.squaresize))+1
+            column = math.floor(x[1][1]/self.squaresize)
 
-            #calculating the row and column of the square where the checker initially was
-            row1 = 7 - (x[0][2]/self.squaresize)
-            column1 = x[0][1]/self.squaresize
+            #calculating the row and column of the square where the checker initially was   
+            row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+            column1 = math.floor(x[0][1]/self.squaresize)
 
             #checking for invalid moves
             if column1 == column or row1 == row or row>row1 or (row1-row)>2:
@@ -1995,7 +2003,7 @@ class OnePlayer():
         global turns
         self.CheckerButtonPress(event)
         x = prevsquare
-        print x
+        # print x
 
             
         if "darkbrownking" in x[0][0]:
@@ -2006,12 +2014,12 @@ class OnePlayer():
                     return
                 
                 #calculating the row and column of the square where the checker wants to move
-                row = 7 - (x[1][2]/self.squaresize)
-                column = x[1][1]/self.squaresize
+                row = math.floor(7 - (x[1][2]/self.squaresize))+1
+                column = math.floor(x[1][1]/self.squaresize)
 
                 #calculating the row and column of the square where the checker initially was   
-                row1 = 7 - (x[0][2]/self.squaresize)
-                column1 = x[0][1]/self.squaresize
+                row1 = math.floor(7 - (x[0][2]/self.squaresize))+1
+                column1 = math.floor(x[0][1]/self.squaresize)
                 
                 if column1 == column or row1 == row:
                     prevsquare = []
@@ -2042,7 +2050,7 @@ class OnePlayer():
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
 
                             #checking if capture square is empty or has a darkbrown checker in it
                             if "darkbrown" in tags:
@@ -2093,7 +2101,7 @@ class OnePlayer():
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -2148,7 +2156,7 @@ class OnePlayer():
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -2200,7 +2208,7 @@ class OnePlayer():
 
                             item = self.canvas.find_closest(capturex1 + 20,capturey1+20)[0]
                             tags = self.canvas.gettags(item)[0]
-                            print tags
+                            # print tags
                             
                             if "darkbrown" in tags:
                                 turns = []
@@ -2271,24 +2279,24 @@ def OnePlayerGame():
     oneplayer = Tk()
     oneplayer.title("Checkers! - One Player")
     OnePlayer(oneplayer)
-    tkMessageBox.showinfo("Information", "You will be the using the DarkBrown checkers.\nThe computer will be playing with the Lightbrown Checkers.\nHave fun!")
+    tm.showinfo("Information", "You will be the using the DarkBrown checkers.\nThe computer will be playing with the Lightbrown Checkers.\nHave fun!")
 
 def TwoPlayerGame(): #opens up one player game window
     twoplayer = Tk()
     twoplayer.title("Checkers! - Two Player")
     TwoPlayer(twoplayer)
-    tkMessageBox.showinfo("Information", "Decide between you and your opponent which checkers you would like to use.\nWhosoever chooses the Darkbrown Checker, they make the first move.")
+    tm.showinfo("Information", "Decide between you and your opponent which checkers you would like to use.\nWhosoever chooses the Darkbrown Checker, they make the first move.")
 
 def ExitProgram(): #exits the program by destroying main startup window
     global startup
-    result = tkMessageBox.askyesno(title = "Exit?", message = "Would you like to exit?") 
+    result = tm.askyesno(title = "Exit?", message = "Would you like to exit?") 
     if result == True:
         startup.destroy()
         
 def Instructions(): #creating a top level window that where an image with all the instruction is places
     howtoplay = Toplevel()
     howtoplay.title("Checkers! - How to Play")
-    background = "/Users/safiyajankhan/Desktop/Instructions.gif"
+    background = "Instructions.gif"
     canvas = Canvas(howtoplay,width=600,height = 570)
     canvas.pack()
     background_image = ImageTk.PhotoImage(file=background) #loading image
@@ -2308,11 +2316,11 @@ def main():
 
     #These images have files paths pertaining to my OS, if you would like to use the images, download them from 
     #my github repository and change the file names below
-    background = "/Users/safiyajankhan/Desktop/CheckersStartup.gif" 
-    howtoplay = "/Users/safiyajankhan/Desktop/HowToPlay.gif"
-    oneplayer = "/Users/safiyajankhan/Desktop/OnePlayer.gif"
-    twoplayer = "/Users/safiyajankhan/Desktop/TwoPlayer.gif"
-    exitprogram = "/Users/safiyajankhan/Desktop/Exit.gif"
+    background = "CheckersStartup.gif" 
+    howtoplay = "HowToPlay.gif"
+    oneplayer = "OnePlayer.gif"
+    twoplayer = "TwoPlayer.gif"
+    exitprogram = "Exit.gif"
 
     #loading images for the buttons      
     howtoplay_photo = ImageTk.PhotoImage(file=howtoplay)
