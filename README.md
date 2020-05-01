@@ -1,6 +1,6 @@
 # Checkers
 
-Hello! I have developed a classic game of Checkers in Python. You can play either with a friend and or with the computer (just an fyi - good luck winning the one player version :P )
+Hello! I have developed a classic game of Checkers in Python. You can play either with a friend and or with the computer :)
 
 ## Running the game
 - Clone the repository on your local machine
