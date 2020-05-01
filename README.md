@@ -13,14 +13,14 @@ To run this program, please download the CheckersFinal.py file, along with the f
  - OnePlayer.gif
  - TwoPlayer.gif 
  
-* When you download all the gif files, make sure you save them in one place and change the file path in the main function of the CheckersFinal.py file *
+* When you download all the gif files, make sure you save them in one place.
 
 You will also need the following libraries:
-- Tkinter
-- TkMessageBox
+- tkinter
 - Random
 - Re
 - PIL
+- math
 
 When you click 'How to Play' a window will open up show displaying all the instructions.
 When you click 'One Player' a game window will open up where you will play against a computer
