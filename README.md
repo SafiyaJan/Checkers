@@ -3,7 +3,7 @@
 Hello! I have developed a classic game of Checkers in Python. You can play either with a friend and or with the computer :)
 
 ## Running the game
-- Clone the repository on your local machine
+- Clone the repository on to your local machine
 - You can run the game by calling ```python3 CheckersFinal.py``` on your command line
 
 ## Dependencies
